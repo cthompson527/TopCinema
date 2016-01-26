@@ -10,17 +10,20 @@ import UIKit
 import AFNetworking
 import MBProgressHUD
 
-class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
     
     var movies: [NSDictionary]?
+    var filteredData: [NSDictionary]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        filteredData = movies
         tableView.dataSource = self
         tableView.delegate = self
+        searchBar.delegate = self
         // Do any additional setup after loading the view.
         
         loadDataFromNetwork()
@@ -37,7 +40,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if let movies = movies {
+        if let movies = filteredData {
             return movies.count
         } else {
             return 0
@@ -54,13 +57,34 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         
         let baseUrl = "http://image.tmdb.org/t/p/w500"
         
-        let imageUrl = NSURL(string: baseUrl + posterPath)
-        
+        let imageUrl = NSURLRequest(URL: NSURL(string: baseUrl + posterPath)!)
+
+
         cell.titleLabel.text = title
         cell.overviewLabel.text = overview
-        cell.posterView.setImageWithURL(imageUrl!)
+        cell.posterView.setImageWithURLRequest(imageUrl,
+                                               placeholderImage: nil,
+                                               success: { (imageUrl, imageResponse, image) -> Void in
+                                                   if imageResponse != nil {
+                                                       print("Image was NOT cached, fade in image")
+                                                       cell.posterView.alpha = 0.0
+                                                       cell.posterView.image = image
+                                                       UIView.animateWithDuration(0.3,
+                                                               animations: {
+                                                                   () -> Void in
+                                                                   cell.posterView.alpha = 1.0
+                                                               })
+                                                   } else {
+                                                       print("Image was cached so just update the image")
+                                                       cell.posterView.image = image
+                                                   }
+                                               },
+                                               failure: { (imageRequest, imageResponse, error) -> Void in
+                                                   print("Image load failed")
+                                               })
         
         print("row \(indexPath.row)")
+        //cell.textLabel?.text = filteredData[indexPath.row]
         return cell
     }
     
@@ -70,13 +94,15 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
         let url = NSURL(string:"https://api.themoviedb.org/3/movie/now_playing?api_key=\(apiKey)")
         let request = NSURLRequest(URL: url!)
+
         let session = NSURLSession(
             configuration: NSURLSessionConfiguration.defaultSessionConfiguration(),
             delegate:nil,
             delegateQueue:NSOperationQueue.mainQueue()
         )
         
-        
+
+
         //scrollView.insertScrollView
         
         let task : NSURLSessionDataTask = session.dataTaskWithRequest(request,
@@ -102,6 +128,14 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         // request is successful
         self.tableView.reloadData()
         refreshControl.endRefreshing()
+    }
+
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        filteredData = searchText.isEmpty ? movies : movies!.filter( { (movie: NSDictionary) -> Bool in
+            return (movie["title"] as! String).rangeOfString(searchText, options: .CaseInsensitiveSearch) != nil
+        })
+
+        tableView.reloadData()
     }
     
     
