@@ -10,7 +10,7 @@ import UIKit
 import AFNetworking
 import MBProgressHUD
 
-class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -80,6 +80,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
                                                })
         
         print("row \(indexPath.row)")
+        //cell.textLabel?.text = filteredData[indexPath.row]
         return cell
     }
     
@@ -124,7 +125,6 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         self.tableView.reloadData()
         refreshControl.endRefreshing()
     }
-
 
     
     
