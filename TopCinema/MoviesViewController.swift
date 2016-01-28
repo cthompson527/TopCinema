@@ -13,12 +13,11 @@ import MBProgressHUD
 class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
-    
+
     var movies: [NSDictionary]?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         tableView.dataSource = self
         tableView.delegate = self
         // Do any additional setup after loading the view.
@@ -46,7 +45,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("MovieCell", forIndexPath: indexPath) as! MovieCell
-        
+
         let movie = movies![indexPath.row]
         let title = movie["title"] as! String
         let overview = movie["overview"] as! String
@@ -54,11 +53,31 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         
         let baseUrl = "http://image.tmdb.org/t/p/w500"
         
-        let imageUrl = NSURL(string: baseUrl + posterPath)
-        
+        let imageUrl = NSURLRequest(URL: NSURL(string: baseUrl + posterPath)!)
+
+
         cell.titleLabel.text = title
         cell.overviewLabel.text = overview
-        cell.posterView.setImageWithURL(imageUrl!)
+        cell.posterView.setImageWithURLRequest(imageUrl,
+                                               placeholderImage: nil,
+                                               success: { (imageUrl, imageResponse, image) -> Void in
+                                                   if imageResponse != nil {
+                                                       print("Image was NOT cached, fade in image")
+                                                       cell.posterView.alpha = 0.0
+                                                       cell.posterView.image = image
+                                                       UIView.animateWithDuration(0.3,
+                                                               animations: {
+                                                                   () -> Void in
+                                                                   cell.posterView.alpha = 1.0
+                                                               })
+                                                   } else {
+                                                       print("Image was cached so just update the image")
+                                                       cell.posterView.image = image
+                                                   }
+                                               },
+                                               failure: { (imageRequest, imageResponse, error) -> Void in
+                                                   print("Image load failed")
+                                               })
         
         print("row \(indexPath.row)")
         return cell
@@ -70,13 +89,15 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
         let url = NSURL(string:"https://api.themoviedb.org/3/movie/now_playing?api_key=\(apiKey)")
         let request = NSURLRequest(URL: url!)
+
         let session = NSURLSession(
             configuration: NSURLSessionConfiguration.defaultSessionConfiguration(),
             delegate:nil,
             delegateQueue:NSOperationQueue.mainQueue()
         )
         
-        
+
+
         //scrollView.insertScrollView
         
         let task : NSURLSessionDataTask = session.dataTaskWithRequest(request,
@@ -103,6 +124,8 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         self.tableView.reloadData()
         refreshControl.endRefreshing()
     }
+
+
     
     
 
