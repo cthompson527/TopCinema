@@ -10,23 +10,22 @@ import UIKit
 import AFNetworking
 import MBProgressHUD
 
-class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
+class MoviesViewController: UIViewController {
 
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var collectionView: UICollectionView!
 
     var movies: [NSDictionary]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.dataSource = self
-        tableView.delegate = self
+        collectionView.dataSource = self
         // Do any additional setup after loading the view.
         
         loadDataFromNetwork()
         
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "refreshControlAction:", forControlEvents: UIControlEvents.ValueChanged)
-        tableView.insertSubview(refreshControl, atIndex: 0)
+        collectionView.insertSubview(refreshControl, atIndex: 0)
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,7 +41,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
             return 0
         }
     }
-    
+    /*
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("MovieCell", forIndexPath: indexPath) as! MovieCell
 
@@ -82,7 +81,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         print("row \(indexPath.row)")
         //cell.textLabel?.text = filteredData[indexPath.row]
         return cell
-    }
+    }*/
     
     func loadDataFromNetwork() {
         MBProgressHUD.showHUDAddedTo(self.view, animated: true)
@@ -109,7 +108,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
                             NSLog("response: \(responseDictionary)")
                             
                             self.movies = responseDictionary["results"] as? [NSDictionary]
-                            self.tableView.reloadData()
+                            self.collectionView.reloadData()
                             MBProgressHUD.hideHUDForView(self.view, animated: true)
                             
                     }
@@ -122,7 +121,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         // fetch latest data
         
         // request is successful
-        self.tableView.reloadData()
+        self.collectionView.reloadData()
         refreshControl.endRefreshing()
     }
 
@@ -139,4 +138,52 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     }
     */
 
+}
+
+extension MoviesViewController: UICollectionViewDataSource {
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if let movies = movies {
+            return movies.count
+        } else {
+            return 0
+        }
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MovieCell", forIndexPath: indexPath) as! MovieCell
+        let movie = movies![indexPath.row]
+        let title = movie["title"] as! String
+        let overview = movie["overview"] as! String
+        let posterPath = movie["poster_path"] as! String
+        
+        let baseUrl = "http://image.tmdb.org/t/p/w500"
+        
+        let imageUrl = NSURLRequest(URL: NSURL(string: baseUrl + posterPath)!)
+        
+        
+        cell.posterView.setImageWithURLRequest(imageUrl,
+            placeholderImage: nil,
+            success: { (imageUrl, imageResponse, image) -> Void in
+                if imageResponse != nil {
+                    print("Image was NOT cached, fade in image")
+                    cell.posterView.alpha = 0.0
+                    cell.posterView.image = image
+                    UIView.animateWithDuration(0.3,
+                        animations: {
+                            () -> Void in
+                            cell.posterView.alpha = 1.0
+                    })
+                } else {
+                    print("Image was cached so just update the image")
+                    cell.posterView.image = image
+                }
+            },
+            failure: { (imageRequest, imageResponse, error) -> Void in
+                print("Image load failed")
+        })
+        
+        print("row \(indexPath.row)")
+        return cell
+        
+    }
 }
