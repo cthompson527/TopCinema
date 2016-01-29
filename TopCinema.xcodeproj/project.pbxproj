@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8E58F26A2075DDCC0BA9A372 /* Pods_TopCinema.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F39695DCCD40F0456F21346 /* Pods_TopCinema.framework */; };
+		A4396EB21C5B358C0046D783 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4396EB11C5B358C0046D783 /* DetailsViewController.swift */; };
 		A4810DCB1C476BFF00B56D6D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4810DCA1C476BFF00B56D6D /* AppDelegate.swift */; };
 		A4810DD01C476C0000B56D6D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4810DCE1C476C0000B56D6D /* Main.storyboard */; };
 		A4810DD21C476C0000B56D6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4810DD11C476C0000B56D6D /* Assets.xcassets */; };
@@ -19,6 +20,7 @@
 /* Begin PBXFileReference section */
 		0F39695DCCD40F0456F21346 /* Pods_TopCinema.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TopCinema.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		99BB89CEA18941B3F6A7CF84 /* Pods-TopCinema.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TopCinema.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TopCinema/Pods-TopCinema.debug.xcconfig"; sourceTree = "<group>"; };
+		A4396EB11C5B358C0046D783 /* DetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		A4810DC71C476BFF00B56D6D /* TopCinema.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TopCinema.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4810DCA1C476BFF00B56D6D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A4810DCF1C476C0000B56D6D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 		A4810DE11C47788F00B56D6D /* view controllers */ = {
 			isa = PBXGroup;
 			children = (
+				A4396EB11C5B358C0046D783 /* DetailsViewController.swift */,
 				A4810DDC1C476D9A00B56D6D /* MoviesViewController.swift */,
 			);
 			name = "view controllers";
@@ -233,6 +236,7 @@
 				A4810DCB1C476BFF00B56D6D /* AppDelegate.swift in Sources */,
 				A4810DDD1C476D9A00B56D6D /* MoviesViewController.swift in Sources */,
 				A4810DE01C47788200B56D6D /* MovieCell.swift in Sources */,
+				A4396EB21C5B358C0046D783 /* DetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

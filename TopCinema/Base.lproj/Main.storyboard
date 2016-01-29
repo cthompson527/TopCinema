@@ -41,6 +41,7 @@
                                         <size key="customSize" width="142" height="227"/>
                                         <connections>
                                             <outlet property="posterView" destination="3h5-ij-7Pc" id="eam-M1-MK4"/>
+                                            <segue destination="WoY-sa-ap2" kind="push" id="PbH-DE-bjT"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -55,6 +56,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="144" y="464"/>
+        </scene>
+        <!--Details View Controller-->
+        <scene sceneID="M0i-qx-jOi">
+            <objects>
+                <viewController id="WoY-sa-ap2" customClass="DetailsViewController" customModule="TopCinema" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="n4I-RE-glQ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Q5c-tx-fkI"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cfD-Sr-2Aj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="503" y="464"/>
         </scene>
     </scenes>
 </document>
