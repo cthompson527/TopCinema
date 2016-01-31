@@ -2,7 +2,7 @@
 
 **TopCinema** is a movies app using the [The Movie Database API](http://docs.themoviedb.apiary.io/#).
 
-Time spent: **5** hours spent in total
+Time spent: **8** hours spent in total
 
 ## User Stories
 
@@ -35,14 +35,13 @@ Please list two areas of the assignment you'd like to **discuss further with you
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/xtcO0QE.gifv' width='' alt='Video Walkthrough' />
-[Imgur](http://i.imgur.com/xtcO0QE.gifv)
+<img src='http://i.imgur.com/xtcO0QE.gif' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+I had a problem with adding the search functionality. I wasn't able to filter out the other movies correctly.
 
 ## License
 
