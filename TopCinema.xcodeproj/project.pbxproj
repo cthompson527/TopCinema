@@ -74,8 +74,8 @@
 		A4810DC91C476BFF00B56D6D /* TopCinema */ = {
 			isa = PBXGroup;
 			children = (
-				A4810DE11C47788F00B56D6D /* view controllers */,
-				A4810DDE1C47785B00B56D6D /* Views */,
+				A4810DE11C47788F00B56D6D /* View Controllers */,
+				A4810DDE1C47785B00B56D6D /* Cells */,
 				A4810DCA1C476BFF00B56D6D /* AppDelegate.swift */,
 				A4810DCE1C476C0000B56D6D /* Main.storyboard */,
 				A4810DD11C476C0000B56D6D /* Assets.xcassets */,
@@ -85,21 +85,21 @@
 			path = TopCinema;
 			sourceTree = "<group>";
 		};
-		A4810DDE1C47785B00B56D6D /* Views */ = {
+		A4810DDE1C47785B00B56D6D /* Cells */ = {
 			isa = PBXGroup;
 			children = (
 				A4810DDF1C47788200B56D6D /* MovieCell.swift */,
 			);
-			name = Views;
+			name = Cells;
 			sourceTree = "<group>";
 		};
-		A4810DE11C47788F00B56D6D /* view controllers */ = {
+		A4810DE11C47788F00B56D6D /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				A4396EB11C5B358C0046D783 /* DetailsViewController.swift */,
 				A4810DDC1C476D9A00B56D6D /* MoviesViewController.swift */,
 			);
-			name = "view controllers";
+			name = "View Controllers";
 			sourceTree = "<group>";
 		};
 		DDCF0A0F8E1113F13543517C /* Frameworks */ = {
@@ -350,6 +350,7 @@
 			baseConfigurationReference = 99BB89CEA18941B3F6A7CF84 /* Pods-TopCinema.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = TopCinema/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Tamu.TopCinema;
@@ -362,6 +363,7 @@
 			baseConfigurationReference = A9AE7925126F4E7E1E30CBE8 /* Pods-TopCinema.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = TopCinema/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Tamu.TopCinema;
