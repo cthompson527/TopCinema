@@ -1,4 +1,4 @@
-# Project 1 - *TopCinema*
+# Project 2 - *TopCinema*
 
 **TopCinema** is a movies app using the [The Movie Database API](http://docs.themoviedb.apiary.io/#).
 
@@ -40,6 +40,8 @@ Here's a walkthrough of implemented user stories:
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
+
+Icons downloaded from Noun Project.
 
 I had a problem with adding the search functionality. I wasn't able to filter out the other movies correctly.
 

@@ -9,9 +9,50 @@
 import UIKit
 
 class DetailsViewController: UIViewController {
+    @IBOutlet weak var posterImageView: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var overviewLabel: UILabel!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var infoView: UIView!
+    var movie: NSDictionary!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        scrollView.contentSize = CGSize(width: scrollView.frame.size.width, height: infoView.frame.origin.y + infoView.frame.size.height)
+        
+        let title = movie["title"] as? String
+        titleLabel.text = title
+        
+        let overview = movie["overview"] as? String
+        overviewLabel.text = overview
+        overviewLabel.sizeToFit()
+        
+        if let posterPath = movie["poster_path"] as? String {
+            let baseUrl = "http://image.tmdb.org/t/p/w500"
+            let imageUrl = NSURLRequest(URL: NSURL(string: baseUrl + posterPath)!)
+            
+            posterImageView.setImageWithURLRequest(imageUrl,
+                placeholderImage: nil,
+                success: { (imageUrl, imageResponse, image) -> Void in
+                    if imageResponse != nil {
+                        print("Image was NOT cached, fade in image")
+                        self.posterImageView.alpha = 0.0
+                        self.posterImageView.image = image
+                        UIView.animateWithDuration(0.3,
+                            animations: {
+                                () -> Void in
+                                self.posterImageView.alpha = 1.0
+                        })
+                    } else {
+                        print("Image was cached so just update the image")
+                        self.posterImageView.image = image
+                    }
+                },
+                failure: { (imageRequest, imageResponse, error) -> Void in
+                    print("Image load failed")
+            })
+        }
 
         // Do any additional setup after loading the view.
     }
