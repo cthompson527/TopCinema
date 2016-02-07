@@ -123,6 +123,7 @@
 				A4810DC51C476BFF00B56D6D /* Resources */,
 				2DE91D959C5E15867F054EF9 /* Embed Pods Frameworks */,
 				C043974B3AA91B0C1605107D /* Copy Pods Resources */,
+				A41D2FEC1C66FE7E00970E83 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -195,6 +196,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TopCinema/Pods-TopCinema-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		A41D2FEC1C66FE7E00970E83 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
 		C043974B3AA91B0C1605107D /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
