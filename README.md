@@ -97,7 +97,7 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+I had some difficulty with the navigation bar. I wanted the bar to be more transparent. I did come accross one way of doing it; however, it didn't look good because the top status bar also became transparent. I like it black, but it would look better if it had a little bit more transparency.
 
 ## License
 
