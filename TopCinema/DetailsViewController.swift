@@ -13,15 +13,11 @@ class DetailsViewController: UIViewController {
   @IBOutlet weak var posterImageView: UIImageView!
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var overviewLabel: UILabel!
-  @IBOutlet weak var scrollView: UIScrollView!
   @IBOutlet weak var infoView: UIView!
   var movie: NSDictionary!
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    let size = CGSize(width: scrollView.frame.size.width, height: infoView.frame.origin.y + infoView.frame.size.height)
-    scrollView.contentSize = size
     
     let title = movie["title"] as? String
     titleLabel.text = title
@@ -55,6 +51,9 @@ class DetailsViewController: UIViewController {
           print("Image load failed")
       })
     }
+    
+    //let gesture = UITapGestureRecognizer(target: posterImageView, action: "hideOverview")
+    // sself.infoView.addGestureRecognizer(gesture)
     // Do any additional setup after loading the view.
   }
   
@@ -63,6 +62,14 @@ class DetailsViewController: UIViewController {
     // Dispose of any resources that can be recreated.
   }
   
+  @IBAction func hideDetails(sender: UITapGestureRecognizer) {
+    if infoView.hidden {
+      infoView.hidden = false
+    } else {
+      infoView.hidden = true
+    }
+    
+  }
   /*
   // MARK: - Navigation
   // In a storyboard-based application, you will often want to do a little preparation before nav
