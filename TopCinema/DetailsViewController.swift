@@ -51,9 +51,6 @@ class DetailsViewController: UIViewController {
           print("Image load failed")
       })
     }
-    
-    //let gesture = UITapGestureRecognizer(target: posterImageView, action: "hideOverview")
-    // sself.infoView.addGestureRecognizer(gesture)
     // Do any additional setup after loading the view.
   }
   
